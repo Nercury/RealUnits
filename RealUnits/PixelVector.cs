@@ -1,5 +1,5 @@
 ﻿/*
- *    Copyright 2009, 2010 Nerijus Arlauskas
+ *    Copyright 2009-2010 Nerijus Arlauskas and contributors
  * 
  *    This file is part of RealUnits.
  *
