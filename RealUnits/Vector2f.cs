@@ -38,7 +38,7 @@ namespace RealUnits
         /// </summary>
         /// <param name="x">X value</param>
         /// <param name="y">Y value</param>
-        public Vector2f(Distance x, Distance y)
+        public Vector2f(DistanceF x, DistanceF y)
         {
             this.x = x.NativeValue;
             this.y = y.GetIn(x.NativeUnit);
@@ -75,11 +75,11 @@ namespace RealUnits
         /// <summary>
         /// Gets or sets X distance
         /// </summary>
-        public Distance X
+        public DistanceF X
         {
             get
             {
-                return new Distance(x, unit);
+                return new DistanceF(x, unit);
             }
             set
             {
@@ -90,11 +90,11 @@ namespace RealUnits
         /// <summary>
         /// Gets or sets Y distance
         /// </summary>
-        public Distance Y
+        public DistanceF Y
         {
             get
             {
-                return new Distance(y, unit);
+                return new DistanceF(y, unit);
             }
             set
             {
@@ -280,22 +280,22 @@ namespace RealUnits
         /// <summary>
         /// Returns length of vector squared
         /// </summary>
-        public Distance LengthSquared
+        public DistanceF LengthSquared
         {
             get
             {
-                return new Distance(NativeLengthSquared, unit);
+                return new DistanceF(NativeLengthSquared, unit);
             }
         }
 
         /// <summary>
         /// Returns length of vector
         /// </summary>
-        public Distance Length
+        public DistanceF Length
         {
             get
             {
-                return new Distance(NativeLength, unit);
+                return new DistanceF(NativeLength, unit);
             }
         }
 
@@ -325,7 +325,7 @@ namespace RealUnits
         /// Scales vector to match specified length
         /// </summary>
         /// <param name="newLength">New vector length</param>
-        public void Scale(Distance newLength)
+        public void Scale(DistanceF newLength)
         {
             float scale = newLength.GetIn(unit) / NativeLength;
             x *= scale;
@@ -337,7 +337,7 @@ namespace RealUnits
         /// </summary>
         /// <param name="newLength">New vector length</param>
         /// <returns>New vector of specified length</returns>
-        public Vector2f Scaled(Distance newLength)
+        public Vector2f Scaled(DistanceF newLength)
         {
             float scale = newLength.GetIn(unit) / NativeLength;
             return this * scale;
@@ -408,7 +408,7 @@ namespace RealUnits
         /// <returns>New vector object</returns>
         public static Vector2f FromPixels(int x, int y, DpiVector2f dpi)
         {
-            return new Vector2f(Distance.FromPixels(x, dpi.DpiX), Distance.FromPixels(y, dpi.DpiY));
+            return new Vector2f(DistanceF.FromPixels(x, dpi.DpiX), DistanceF.FromPixels(y, dpi.DpiY));
         }
     }
 }

@@ -64,7 +64,7 @@
     <Compile Include="Rectangle2f.cs" />
     <Compile Include="PixelVector.cs" />
     <Compile Include="UnitCentimeter.cs" />
-    <Compile Include="Distance.cs" />
+    <Compile Include="DistanceF.cs" />
     <Compile Include="UnitDecimeter.cs" />
     <Compile Include="UnitFoot.cs" />
     <Compile Include="UnitInch.cs" />

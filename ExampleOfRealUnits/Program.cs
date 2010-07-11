@@ -13,20 +13,20 @@ namespace ExampleOfRealUnits
         static void Main(string[] args)
         {
             // new distance in meters
-            Distance a = new Distance(10, Unit.Meters);
+            DistanceF a = new DistanceF(10, Unit.Meters);
             // new distance in centimeters
-            Distance b = new Distance(5, Unit.Centimeters);
+            DistanceF b = new DistanceF(5, Unit.Centimeters);
             // new distance in inches
-            Distance c = new Distance(14, Unit.Inches);
+            DistanceF c = new DistanceF(14, Unit.Inches);
             // new distance in feet
-            Distance d = new Distance(1.5f, Unit.Feet);
+            DistanceF d = new DistanceF(1.5f, Unit.Feet);
 
             // sum of them (all converted automatically)
-            Distance sum = a + b + c + d;
+            DistanceF sum = a + b + c + d;
             Console.WriteLine("Sum of " + a + ", " + b + ", " + c + ", " + d + " equals " + sum);
 
             // get distance converted to millimeters
-            Distance mm = sum.Converted(Unit.Millimeters);
+            DistanceF mm = sum.Converted(Unit.Millimeters);
 
             // get distance as float
             float distanceAsFloat = mm.Decimeters;
@@ -37,7 +37,7 @@ namespace ExampleOfRealUnits
             Console.WriteLine(b + " is " + pixels + " pixels on 92 dpi monitor"); 
 
             // create distance from pixels
-            Distance distanceFromPixels = Distance.FromPixels(1024, 92);
+            DistanceF distanceFromPixels = DistanceF.FromPixels(1024, 92);
             Console.WriteLine("Screen width is " + distanceFromPixels + " on 1024px wide 92dpi display");  
 
             // compare distances
@@ -77,7 +77,7 @@ namespace ExampleOfRealUnits
             Rectangle2f rect = new Rectangle2f(10, 15, 90, 80, Unit.Millimeters);
 
             // Crop rectangle top and right margins by 1 cm
-            Rectangle2f rectCropped = rect.Cropped(Distance.Zero, new Distance(1, Unit.Centimeters), new Distance(1, Unit.Centimeters), Distance.Zero);
+            Rectangle2f rectCropped = rect.Cropped(DistanceF.Zero, new DistanceF(1, Unit.Centimeters), new DistanceF(1, Unit.Centimeters), DistanceF.Zero);
 
             Console.WriteLine("(Rectangle " + rect + ") with top and right cm cropped is equal to (Rectangle " + rectCropped + ")");
 

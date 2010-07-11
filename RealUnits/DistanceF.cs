@@ -28,7 +28,7 @@ namespace RealUnits
     /// <summary>
     /// Distance in real units
     /// </summary>
-    public class Distance
+    public class DistanceF
     {
         private const float smallVal = 0.000001f;
 
@@ -37,7 +37,7 @@ namespace RealUnits
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public static Distance Parse(string s)
+        public static DistanceF Parse(string s)
         {
             if (s == null)
                 throw new FormatException("Can't parse null string.");
@@ -52,7 +52,7 @@ namespace RealUnits
                         if (ls.EndsWith(unit.Name))
                         {
                             if (float.TryParse(s.Substring(0, s.Length - nameLength), System.Globalization.NumberStyles.Number, CultureInfo.InvariantCulture, out value))
-                                return new Distance(value, Unit.Millimeters);
+                                return new DistanceF(value, Unit.Millimeters);
                             else
                                 throw new FormatException("Invalid " + unit.Name + " unit value.");
                         }
@@ -68,15 +68,15 @@ namespace RealUnits
         /// <param name="pixels">Pixels on device</param>
         /// <param name="dpi">Device resolution</param>
         /// <returns>New distance object</returns>
-        public static Distance FromPixels(int pixels, float dpi)
+        public static DistanceF FromPixels(int pixels, float dpi)
         {
-            return new Distance(pixels / dpi, Unit.Inches);
+            return new DistanceF(pixels / dpi, Unit.Inches);
         }
 
         /// <summary>
         /// Specifies value of distance which is equal to 0
         /// </summary>
-        public static Distance Zero = new Distance(0, Unit.Millimeters);
+        public static DistanceF Zero = new DistanceF(0, Unit.Millimeters);
 
         private Unit unit;
         private float value;
@@ -86,7 +86,7 @@ namespace RealUnits
         /// </summary>
         /// <param name="value">Distance</param>
         /// <param name="unit">Unit type</param>
-        public Distance(float value, Unit unit)
+        public DistanceF(float value, Unit unit)
         {
             this.unit = unit;
             this.value = value;
@@ -117,9 +117,9 @@ namespace RealUnits
         /// </summary>
         /// <param name="unit">Other unit type</param>
         /// <returns>New distance object</returns>
-        public Distance Converted(Unit unit)
+        public DistanceF Converted(Unit unit)
         {
-            return new Distance(this.unit.Convert(this.value, unit), unit);
+            return new DistanceF(this.unit.Convert(this.value, unit), unit);
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace RealUnits
         /// <param name="a">Distance A</param>
         /// <param name="b">Distance B</param>
         /// <returns>Comparision result</returns>
-        public static bool operator <(Distance a, Distance b)
+        public static bool operator <(DistanceF a, DistanceF b)
         {
             return a.value < b.GetIn(a.unit);
         }
@@ -178,7 +178,7 @@ namespace RealUnits
         /// <param name="a">Distance A</param>
         /// <param name="b">Distance B</param>
         /// <returns>Comparision result</returns>
-        public static bool operator >(Distance a, Distance b)
+        public static bool operator >(DistanceF a, DistanceF b)
         {
             return a.value > b.GetIn(a.unit);
         }
@@ -189,7 +189,7 @@ namespace RealUnits
         /// <param name="a">Distance A</param>
         /// <param name="b">Distance B</param>
         /// <returns>Comparision result</returns>
-        public static bool operator <=(Distance a, Distance b)
+        public static bool operator <=(DistanceF a, DistanceF b)
         {
             return a.value <= b.GetIn(a.unit);
         }
@@ -200,7 +200,7 @@ namespace RealUnits
         /// <param name="a">Distance A</param>
         /// <param name="b">Distance B</param>
         /// <returns>Comparision result</returns>
-        public static bool operator >=(Distance a, Distance b)
+        public static bool operator >=(DistanceF a, DistanceF b)
         {
             return a.value >= b.GetIn(a.unit);
         }
@@ -212,9 +212,9 @@ namespace RealUnits
         /// <returns>True if distance is equal to another object, false if not.</returns>
         public override bool Equals(object obj)
         {
-            if (obj is Distance)
+            if (obj is DistanceF)
             {
-                return this == (Distance)obj;
+                return this == (DistanceF)obj;
             }
             else return false;
         }
@@ -234,7 +234,7 @@ namespace RealUnits
         /// <param name="a">Distance A</param>
         /// <param name="b">Distance B</param>
         /// <returns>True if distances are equal</returns>
-        public static bool operator ==(Distance a, Distance b)
+        public static bool operator ==(DistanceF a, DistanceF b)
         {
             return a.value > b.GetIn(a.unit) - smallVal && a.value < b.GetIn(a.unit) + smallVal;
         }
@@ -245,7 +245,7 @@ namespace RealUnits
         /// <param name="a">Distance A</param>
         /// <param name="b">Distance B</param>
         /// <returns>True if distances are not equal</returns>
-        public static bool operator !=(Distance a, Distance b)
+        public static bool operator !=(DistanceF a, DistanceF b)
         {
             return !(a == b);
         }
@@ -256,9 +256,9 @@ namespace RealUnits
         /// <param name="a">Distance A</param>
         /// <param name="b">Distance B</param>
         /// <returns>New distance</returns>
-        public static Distance operator +(Distance a, Distance b)
+        public static DistanceF operator +(DistanceF a, DistanceF b)
         {
-            return new Distance(a.value + b.GetIn(a.unit), a.unit);
+            return new DistanceF(a.value + b.GetIn(a.unit), a.unit);
         }
 
         /// <summary>
@@ -267,9 +267,9 @@ namespace RealUnits
         /// <param name="a">Distance A</param>
         /// <param name="b">Distance B</param>
         /// <returns>New distance</returns>
-        public static Distance operator -(Distance a, Distance b)
+        public static DistanceF operator -(DistanceF a, DistanceF b)
         {
-            return new Distance(a.value - b.GetIn(a.unit), a.unit);
+            return new DistanceF(a.value - b.GetIn(a.unit), a.unit);
         }
 
         /// <summary>
@@ -278,9 +278,9 @@ namespace RealUnits
         /// <param name="a">Distance A</param>
         /// <param name="scalar">Value</param>
         /// <returns>New distance</returns>
-        public static Distance operator *(Distance a, float scalar)
+        public static DistanceF operator *(DistanceF a, float scalar)
         {
-            return new Distance(a.value * scalar, a.unit);
+            return new DistanceF(a.value * scalar, a.unit);
         }
 
         /// <summary>
@@ -289,9 +289,9 @@ namespace RealUnits
         /// <param name="scalar">Value</param>
         /// <param name="a">Distance A</param>
         /// <returns>New distance</returns>
-        public static Distance operator *(float scalar, Distance a)
+        public static DistanceF operator *(float scalar, DistanceF a)
         {
-            return new Distance(a.value * scalar, a.unit);
+            return new DistanceF(a.value * scalar, a.unit);
         }
 
         /// <summary>
@@ -300,9 +300,9 @@ namespace RealUnits
         /// <param name="a">Distance A</param>
         /// <param name="scalar">Value</param>
         /// <returns>New distance</returns>
-        public static Distance operator /(Distance a, float scalar)
+        public static DistanceF operator /(DistanceF a, float scalar)
         {
-            return new Distance(a.value / scalar, a.unit);
+            return new DistanceF(a.value / scalar, a.unit);
         }
 
         /// <summary>
@@ -311,7 +311,7 @@ namespace RealUnits
         /// <param name="a">Distance A</param>
         /// <param name="b">Distance B</param>
         /// <returns>Scalar value</returns>
-        public static float operator /(Distance a, Distance b)
+        public static float operator /(DistanceF a, DistanceF b)
         {
             return a.value / b.GetIn(a.unit);
         }
@@ -322,7 +322,7 @@ namespace RealUnits
         /// <param name="a">Distance A for X value</param>
         /// <param name="b">Distance B for Y value</param>
         /// <returns>Distance vector</returns>
-        public static Vector2f operator ^(Distance a, Distance b)
+        public static Vector2f operator ^(DistanceF a, DistanceF b)
         {
             return new Vector2f(a.NativeValue, b.GetIn(a.NativeUnit), a.NativeUnit);
         }

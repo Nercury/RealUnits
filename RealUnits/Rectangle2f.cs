@@ -41,7 +41,7 @@ namespace RealUnits
         /// <param name="y">Y value</param>
         /// <param name="width">Width value</param>
         /// <param name="height">Height value</param>
-        public Rectangle2f(Distance x, Distance y, Distance width, Distance height)
+        public Rectangle2f(DistanceF x, DistanceF y, DistanceF width, DistanceF height)
         {
             this.x = x.NativeValue;
             this.y = y.GetIn(x.NativeUnit);
@@ -90,44 +90,44 @@ namespace RealUnits
         /// <summary>
         /// Returns top y coordinate of rectangle
         /// </summary>
-        public Distance Top
+        public DistanceF Top
         {
             get
             {
-                return new Distance(y, unit);
+                return new DistanceF(y, unit);
             }
         }
 
         /// <summary>
         /// Returns left x coordinate of rectangle
         /// </summary>
-        public Distance Left
+        public DistanceF Left
         {
             get
             {
-                return new Distance(x, unit);
+                return new DistanceF(x, unit);
             }
         }
 
         /// <summary>
         /// Returns right x coordinate of rectangle
         /// </summary>
-        public Distance Right
+        public DistanceF Right
         {
             get
             {
-                return new Distance(x + w, unit);
+                return new DistanceF(x + w, unit);
             }
         }
 
         /// <summary>
         /// Returns bottom y coordinate of rectangle
         /// </summary>
-        public Distance Bottom
+        public DistanceF Bottom
         {
             get
             {
-                return new Distance(y + h, unit);
+                return new DistanceF(y + h, unit);
             }
         }
 
@@ -178,11 +178,11 @@ namespace RealUnits
         /// <summary>
         /// Gets or sets X distance
         /// </summary>
-        public Distance X
+        public DistanceF X
         {
             get
             {
-                return new Distance(x, unit);
+                return new DistanceF(x, unit);
             }
             set
             {
@@ -193,11 +193,11 @@ namespace RealUnits
         /// <summary>
         /// Gets or sets Y distance
         /// </summary>
-        public Distance Y
+        public DistanceF Y
         {
             get
             {
-                return new Distance(y, unit);
+                return new DistanceF(y, unit);
             }
             set
             {
@@ -208,11 +208,11 @@ namespace RealUnits
         /// <summary>
         /// Gets or sets Width
         /// </summary>
-        public Distance Width
+        public DistanceF Width
         {
             get
             {
-                return new Distance(w, unit);
+                return new DistanceF(w, unit);
             }
             set
             {
@@ -223,11 +223,11 @@ namespace RealUnits
         /// <summary>
         /// Gets or sets Height
         /// </summary>
-        public Distance Height
+        public DistanceF Height
         {
             get
             {
-                return new Distance(h, unit);
+                return new DistanceF(h, unit);
             }
             set
             {
@@ -325,7 +325,7 @@ namespace RealUnits
         /// <param name="top">How much to crop from top</param>
         /// <param name="bottom">How much to crop from bottom</param>
         /// <returns>New cropped rectangle</returns>
-        public Rectangle2f Cropped(Distance left, Distance right, Distance top, Distance bottom)
+        public Rectangle2f Cropped(DistanceF left, DistanceF right, DistanceF top, DistanceF bottom)
         {
             float l = left.GetIn(unit);
             float t = top.GetIn(unit);
