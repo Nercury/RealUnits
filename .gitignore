@@ -1,0 +1,8 @@
+*.suo
+**/*.sdf
+**/*.user
+**/*.sln*
+*.bak
+bin/
+obj/
+.Trash-*/
