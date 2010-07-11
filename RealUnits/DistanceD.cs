@@ -30,7 +30,7 @@ namespace RealUnits
     /// </summary>
     public class DistanceD
     {
-        private const float smallVal = 0.000001f;
+        private const double smallVal = 0.000000001f;
 
         /// <summary>
         /// Parse distance value from string representation
@@ -41,7 +41,7 @@ namespace RealUnits
         {
             if (s == null)
                 throw new FormatException("Can't parse null string.");
-            float value;
+            double value;
             string ls = s.ToLowerInvariant();
             for (int nameLength = Unit.LongestUnitName; nameLength >= Unit.ShortestUnitName; nameLength--)
             {
@@ -51,7 +51,7 @@ namespace RealUnits
                     {
                         if (ls.EndsWith(unit.Name))
                         {
-                            if (float.TryParse(s.Substring(0, s.Length - nameLength), System.Globalization.NumberStyles.Number, CultureInfo.InvariantCulture, out value))
+                            if (double.TryParse(s.Substring(0, s.Length - nameLength), System.Globalization.NumberStyles.Number, CultureInfo.InvariantCulture, out value))
                                 return new DistanceD(value, Unit.Millimeters);
                             else
                                 throw new FormatException("Invalid " + unit.Name + " unit value.");
@@ -68,7 +68,7 @@ namespace RealUnits
         /// <param name="pixels">Pixels on device</param>
         /// <param name="dpi">Device resolution</param>
         /// <returns>New distance object</returns>
-        public static DistanceD FromPixels(int pixels, float dpi)
+        public static DistanceD FromPixels(int pixels, double dpi)
         {
             return new DistanceD(pixels / dpi, Unit.Inches);
         }
@@ -79,14 +79,14 @@ namespace RealUnits
         public static DistanceD Zero = new DistanceD(0, Unit.Millimeters);
 
         private Unit unit;
-        private float value;
+        private double value;
 
         /// <summary>
         /// Create new distance with specified unit type.
         /// </summary>
         /// <param name="value">Distance</param>
         /// <param name="unit">Unit type</param>
-        public DistanceD(float value, Unit unit)
+        public DistanceD(double value, Unit unit)
         {
             this.unit = unit;
             this.value = value;
@@ -97,7 +97,7 @@ namespace RealUnits
         /// </summary>
         /// <param name="dotsPerInch">DPI value</param>
         /// <returns>Value in pixels</returns>
-        public float Pixels(float dotsPerInch)
+        public double Pixels(double dotsPerInch)
         {
             return Inches * dotsPerInch;
         }
@@ -107,7 +107,7 @@ namespace RealUnits
         /// </summary>
         /// <param name="unit">Unit format of requested value</param>
         /// <returns>Value in specified units</returns>
-        public float GetIn(Unit unit)
+        public double GetIn(Unit unit)
         {
             return this.unit.Convert(this.value, unit);
         }
@@ -125,7 +125,7 @@ namespace RealUnits
         /// <summary>
         /// Get value in native format
         /// </summary>
-        public float NativeValue { get { return this.value; } }
+        public double NativeValue { get { return this.value; } }
 
         /// <summary>
         /// Get units used for this distance
@@ -135,31 +135,31 @@ namespace RealUnits
         /// <summary>
         /// Get distance as meters
         /// </summary>
-        public float Meters { get { return unit.ToMeters(value); } }
+        public double Meters { get { return unit.ToMeters(value); } }
         /// <summary>
         /// Get distance as millimeters
         /// </summary>
-        public float Millimeters { get { return unit.ToMillimeters(value); } }
+        public double Millimeters { get { return unit.ToMillimeters(value); } }
         /// <summary>
         /// Get distance as centimeters
         /// </summary>
-        public float Centimeters { get { return unit.ToCentimeters(value); } }
+        public double Centimeters { get { return unit.ToCentimeters(value); } }
         /// <summary>
         /// Get distance as decimeters
         /// </summary>
-        public float Decimeters { get { return unit.ToDecimeters(value); } }
+        public double Decimeters { get { return unit.ToDecimeters(value); } }
         /// <summary>
         /// Get distance as inches
         /// </summary>
-        public float Inches { get { return unit.ToInches(value); } }
+        public double Inches { get { return unit.ToInches(value); } }
         /// <summary>
         /// Get distance in hundreds of inches
         /// </summary>
-        public float HInches { get { return unit.ToInches(value) * 100.0f; } }
+        public double HInches { get { return unit.ToInches(value) * 100.0f; } }
         /// <summary>
         /// Get distance as number of feet
         /// </summary>
-        public float Feet { get { return unit.ToFeet(value); } }
+        public double Feet { get { return unit.ToFeet(value); } }
 
         /// <summary>
         /// Compares two distances
@@ -278,7 +278,7 @@ namespace RealUnits
         /// <param name="a">Distance A</param>
         /// <param name="scalar">Value</param>
         /// <returns>New distance</returns>
-        public static DistanceD operator *(DistanceD a, float scalar)
+        public static DistanceD operator *(DistanceD a, double scalar)
         {
             return new DistanceD(a.value * scalar, a.unit);
         }
@@ -289,7 +289,7 @@ namespace RealUnits
         /// <param name="scalar">Value</param>
         /// <param name="a">Distance A</param>
         /// <returns>New distance</returns>
-        public static DistanceD operator *(float scalar, DistanceD a)
+        public static DistanceD operator *(double scalar, DistanceD a)
         {
             return new DistanceD(a.value * scalar, a.unit);
         }
@@ -300,7 +300,7 @@ namespace RealUnits
         /// <param name="a">Distance A</param>
         /// <param name="scalar">Value</param>
         /// <returns>New distance</returns>
-        public static DistanceD operator /(DistanceD a, float scalar)
+        public static DistanceD operator /(DistanceD a, double scalar)
         {
             return new DistanceD(a.value / scalar, a.unit);
         }
@@ -311,7 +311,7 @@ namespace RealUnits
         /// <param name="a">Distance A</param>
         /// <param name="b">Distance B</param>
         /// <returns>Scalar value</returns>
-        public static float operator /(DistanceD a, DistanceD b)
+        public static double operator /(DistanceD a, DistanceD b)
         {
             return a.value / b.GetIn(a.unit);
         }
@@ -322,9 +322,9 @@ namespace RealUnits
         /// <param name="a">Distance A for X value</param>
         /// <param name="b">Distance B for Y value</param>
         /// <returns>Distance vector</returns>
-        public static Vector2f operator ^(DistanceD a, DistanceD b)
+        public static Vector2d operator ^(DistanceD a, DistanceD b)
         {
-            return new Vector2f(a.NativeValue, b.GetIn(a.NativeUnit), a.NativeUnit);
+            return new Vector2d(a.NativeValue, b.GetIn(a.NativeUnit), a.NativeUnit);
         }
 
         /// <summary>

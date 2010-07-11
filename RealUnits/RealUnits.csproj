@@ -55,6 +55,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Rectangle2d.cs" />
+    <Compile Include="DpiVector2d.cs" />
+    <Compile Include="Vector2d.cs" />
     <Compile Include="DistanceD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DpiVector2f.cs" />
